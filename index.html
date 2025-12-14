@@ -1,11 +1,1112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Автомийка "Чистота" | Головна</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Базові стилі */
+    :root {
+      --primary-color: #2E86AB;
+      --primary-dark: #1C6B8C;
+      --accent-color: #FF8035;
+      --accent-dark: #E55A00;
+      --background: #F8F9FA;
+      --text-primary: #212529;
+      --text-secondary: #6C757D;
+      --text-light: #F8F9FA;
+      --success-color: #28A745;
+      --error-color: #DC3545;
+      --border-color: #DEE2E6;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+      --transition: all 0.3s ease;
+    }
+
+    .dark-theme {
+      --background: #212529;
+      --text-primary: #F8F9FA;
+      --text-secondary: #ADB5BD;
+      --border-color: #495057;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo span {
+      color: var(--text-primary);
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 500;
+      padding: 8px 0;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--primary-color);
+    }
+
+    .nav-menu a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary-color);
+      animation: underline 0.3s ease;
+    }
+
+    @keyframes underline {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    /* Кнопки */
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-accent {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    .btn-accent:hover {
+      background-color: var(--accent-dark);
+      transform: scale(1.02);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-large {
+      padding: 16px 32px;
+      font-size: 18px;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* Бургер-меню */
+    .burger-menu {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .burger-menu span {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .burger-menu.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .burger-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger-menu.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 40px;
+      opacity: 0.9;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Services */
+    .services {
+      padding: 80px 0;
+    }
+
+    .services h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 50px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary-color);
+    }
+
+    .service-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+
+    .service-card p {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    /* Форма зворотного зв'язку */
+    .feedback {
+      padding: 80px 0;
+      background-color: #f5f7fa;
+    }
+
+    .feedback h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .feedback-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
+    }
+
+    .form-group input.error,
+    .form-group textarea.error {
+      border-color: var(--error-color);
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 14px;
+      margin-top: 5px;
+      display: block;
+      min-height: 20px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary-color);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 40px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-info .logo {
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .footer-info p {
+      color: #bdc3c7;
+    }
+
+    .footer-contact p {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--error-color);
+      transform: scale(1.1);
+    }
+
+    .modal-content {
+      text-align: center;
+    }
+
+    .modal-content h3 {
+      color: var(--success-color);
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    .modal-content p {
+      color: var(--text-secondary);
+      margin-bottom: 25px;
+    }
+
+    /* Адаптивність */
+    @media (max-width: 768px) {
+      .burger-menu {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        gap: 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-menu li {
+        width: 100%;
+      }
+
+      .nav-menu a {
+        display: block;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .nav-menu a:last-child {
+        border-bottom: none;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+      }
+
+      .feedback-form {
+        padding: 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .btn-large {
+        padding: 14px 28px;
+        font-size: 16px;
+      }
+
+      .services h2,
+      .feedback h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="#" class="logo">🚗 <span>Автомийка</span></a>
+
+        <!-- Бургер-меню для мобільних -->
+        <button class="burger-menu" id="burgerMenu" aria-label="Відкрити меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Основне меню -->
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#" class="active">Головна</a></li>
+          <li><a href="#services">Послуги</a></li>
+          <li><a href="#booking">Бронювання</a></li>
+          <li><a href="#feedback">Контакти</a></li>
+          <li><a href="#account">Кабінет</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+          <button class="btn btn-outline" id="themeToggle">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text">Темна</span>
+          </button>
+          <a href="#booking" class="btn btn-primary">Забронювати</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Професійна мийка вашого авто</h1>
+        <p>Швидко, якісно, з любов'ю до вашої машини. Бронювання онлайн за 2 хвилини!</p>
+        <a href="#booking" class="btn btn-accent btn-large">Забронювати зараз</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <h2>Наші послуги</h2>
+      <div class="services-grid">
+        <div class="service-card" data-service="basic">
+          <div class="service-icon">🚿</div>
+          <h3>Базова мийка</h3>
+          <p>Зовнішня мийка, сушка, очищення коліс. Ідеально для щоденного догляду.</p>
+          <div class="price">150 грн</div>
+          <button class="btn btn-outline select-service">Обрати</button>
+        </div>
+
+        <div class="service-card" data-service="standard">
+          <div class="service-icon">✨</div>
+          <h3>Стандарт</h3>
+          <p>Базова + чищення салону, обробка шин. Для тих, хто цінує комфорт.</p>
+          <div class="price">250 грн</div>
+          <button class="btn btn-outline select-service">Обрати</button>
+        </div>
+
+        <div class="service-card" data-service="premium">
+          <div class="service-icon">🏆</div>
+          <h3>Преміум</h3>
+          <p>Повна мийка з поліруванням, хімчистка. Ваше авто буде сяяти!</p>
+          <div class="price">450 грн</div>
+          <button class="btn btn-outline select-service">Обрати</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section class="feedback" id="booking">
+    <div class="container">
+      <h2>Швидке бронювання</h2>
+      <form id="bookingForm" class="feedback-form">
+        <div class="form-group">
+          <label for="bookingDate">Дата</label>
+          <input type="date" id="bookingDate" name="bookingDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingTime">Час</label>
+          <select id="bookingTime" name="bookingTime" required>
+            <option value="">Оберіть час</option>
+            <option value="10:00">10:00 - 11:00</option>
+            <option value="11:00">11:00 - 12:00</option>
+            <option value="12:00">12:00 - 13:00</option>
+            <option value="14:00">14:00 - 15:00</option>
+            <option value="15:00">15:00 - 16:00</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="carType">Тип автомобіля</label>
+          <select id="carType" name="carType" required>
+            <option value="">Оберіть тип</option>
+            <option value="sedan">Легковий (седан)</option>
+            <option value="suv">Кросовер/Позашляховик</option>
+            <option value="minivan">Мінівен</option>
+            <option value="business">Бізнес-клас</option>
+          </select>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="urgent" name="urgent">
+          <label for="urgent">Термінове обслуговування (+50 грн)</label>
+        </div>
+
+        <button type="submit" class="btn btn-accent btn-block">Забронювати</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Feedback Form -->
+  <section class="feedback" id="feedback">
+    <div class="container">
+      <h2>Зворотний зв'язок</h2>
+      <form id="feedbackForm" class="feedback-form">
+        <div class="form-group">
+          <label for="name">Ваше ім'я</label>
+          <input type="text" id="name" name="name" required placeholder="Введіть ваше ім'я">
+          <span class="error-message" id="nameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="example@email.com">
+          <span class="error-message" id="emailError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Повідомлення</label>
+          <textarea id="message" name="message" rows="4" required placeholder="Ваш відгук або питання..."></textarea>
+          <span class="error-message" id="messageError"></span>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="newsletter" name="newsletter">
+          <label for="newsletter">Отримувати новини та акції</label>
+        </div>
+
+        <button type="submit" class="btn btn-accent btn-block">Надіслати</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="logo">🚗 <span>Автомийка "Чистота"</span></div>
+          <p>© 2024 Автомийка "Чистота". Всі права захищені.</p>
+        </div>
+        <div class="footer-contact">
+          <p>📞 +380 12 345 6789</p>
+          <p>📍 м. Київ, вул. Автомийкова, 15</p>
+          <p>🕒 Щодня 8:00 - 22:00</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal для підтвердження -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">×</button>
+      <div class="modal-content">
+        <h3 id="modalTitle">Дякуємо за відгук!</h3>
+        <p id="modalMessage">Ваше повідомлення успішно надіслано. Ми зв'яжемося з вами найближчим часом.</p>
+        <button class="btn btn-primary" id="modalOk">ОК</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const burgerMenu = document.getElementById('burgerMenu');
+    const navMenu = document.getElementById('navMenu');
+    const themeToggle = document.getElementById('themeToggle');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const bookingForm = document.getElementById('bookingForm');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+    const modalOk = document.getElementById('modalOk');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const serviceCards = document.querySelectorAll('.service-card');
+    const selectServiceBtns = document.querySelectorAll('.select-service');
+
+    // Бургер-меню
+    burgerMenu.addEventListener('click', () => {
+      burgerMenu.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Закриття меню при кліку на посилання
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        burgerMenu.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Перемикач теми
+    themeToggle.addEventListener('click', function () {
+      document.body.classList.toggle('dark-theme');
+      const themeIcon = this.querySelector('.theme-icon');
+      const themeText = this.querySelector('.theme-text');
+
+      if (document.body.classList.contains('dark-theme')) {
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Світла';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Темна';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Завантаження теми з localStorage
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggle.querySelector('.theme-icon').textContent = '☀️';
+        themeToggle.querySelector('.theme-text').textContent = 'Світла';
+      }
+
+      // Встановлюємо мінімальну дату на сьогодні
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('bookingDate').min = today;
+      document.getElementById('bookingDate').value = today;
+    });
+
+    // Анімація карток послуг
+    serviceCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px)';
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+      });
+    });
+
+    // Вибір послуги
+    selectServiceBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        // Видаляємо активний клас з усіх карток
+        serviceCards.forEach(card => {
+          card.classList.remove('selected');
+          card.querySelector('.select-service').textContent = 'Обрати';
+          card.querySelector('.select-service').classList.remove('btn-primary');
+          card.querySelector('.select-service').classList.add('btn-outline');
+        });
+
+        // Додаємо активний клас до батьківської картки
+        const parentCard = this.closest('.service-card');
+        parentCard.classList.add('selected');
+        this.textContent = 'Обрано ✓';
+        this.classList.remove('btn-outline');
+        this.classList.add('btn-primary');
+
+        // Зберігаємо вибір
+        const serviceType = parentCard.dataset.service;
+        localStorage.setItem('selectedService', serviceType);
+
+        // Анімація підтвердження
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = 'scale(1)';
+        }, 150);
+      });
+    });
+
+    // Завантаження вибраної послуги
+    window.addEventListener('DOMContentLoaded', () => {
+      const selectedService = localStorage.getItem('selectedService');
+      if (selectedService) {
+        const card = document.querySelector(`[data-service="${selectedService}"]`);
+        if (card) {
+          const btn = card.querySelector('.select-service');
+          card.classList.add('selected');
+          btn.textContent = 'Обрано ✓';
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-primary');
+        }
+      }
+    });
+
+    // Валідація форми
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    function validateForm(formId) {
+      let isValid = true;
+
+      if (formId === 'feedbackForm') {
+        // Валідація імені
+        const nameInput = document.getElementById('name');
+        const nameError = document.getElementById('nameError');
+        if (nameInput.value.trim().length < 2) {
+          nameInput.classList.add('error');
+          nameError.textContent = 'Ім\'я має містити принаймні 2 символи';
+          isValid = false;
+        } else {
+          nameInput.classList.remove('error');
+          nameError.textContent = '';
+        }
+
+        // Валідація email
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+        if (!validateEmail(emailInput.value)) {
+          emailInput.classList.add('error');
+          emailError.textContent = 'Будь ласка, введіть коректний email';
+          isValid = false;
+        } else {
+          emailInput.classList.remove('error');
+          emailError.textContent = '';
+        }
+
+        // Валідація повідомлення
+        const messageInput = document.getElementById('message');
+        const messageError = document.getElementById('messageError');
+        if (messageInput.value.trim().length < 10) {
+          messageInput.classList.add('error');
+          messageError.textContent = 'Повідомлення має містити принаймні 10 символів';
+          isValid = false;
+        } else {
+          messageInput.classList.remove('error');
+          messageError.textContent = '';
+        }
+      } else if (formId === 'bookingForm') {
+        // Валідація бронювання
+        const timeInput = document.getElementById('bookingTime');
+        if (!timeInput.value) {
+          timeInput.classList.add('error');
+          isValid = false;
+        } else {
+          timeInput.classList.remove('error');
+        }
+      }
+
+      return isValid;
+    }
+
+    // Валідація в реальному часі
+    document.getElementById('name')?.addEventListener('input', function () {
+      if (this.value.trim().length >= 2) {
+        this.classList.remove('error');
+        document.getElementById('nameError').textContent = '';
+      }
+    });
+
+    document.getElementById('email')?.addEventListener('input', function () {
+      if (validateEmail(this.value)) {
+        this.classList.remove('error');
+        document.getElementById('emailError').textContent = '';
+      }
+    });
+
+    document.getElementById('message')?.addEventListener('input', function () {
+      if (this.value.trim().length >= 10) {
+        this.classList.remove('error');
+        document.getElementById('messageError').textContent = '';
+      }
+    });
+
+    // Відправка форми зворотного зв'язку
+    feedbackForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (validateForm('feedbackForm')) {
+        // Імітація відправки
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+
+        submitBtn.textContent = 'Відправка...';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          // Показуємо модальне вікно
+          modalTitle.textContent = 'Дякуємо за відгук!';
+          modalMessage.textContent = 'Ваше повідомлення успішно надіслано. Ми зв\'яжемося з вами найближчим часом.';
+          modalOverlay.style.display = 'flex';
+
+          // Скидаємо форму
+          feedbackForm.reset();
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+
+          // Анімація успіху
+          submitBtn.style.backgroundColor = 'var(--success-color)';
+          setTimeout(() => {
+            submitBtn.style.backgroundColor = '';
+          }, 1000);
+
+        }, 1500);
+      }
+    });
+
+    // Відправка форми бронювання
+    bookingForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (validateForm('bookingForm')) {
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+
+        submitBtn.textContent = 'Бронювання...';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          const date = document.getElementById('bookingDate').value;
+          const time = document.getElementById('bookingTime').value;
+          const carType = document.getElementById('carType').value;
+
+          modalTitle.textContent = 'Бронювання підтверджено!';
+          modalMessage.textContent = `Ваше бронювання на ${date} о ${time} для ${carType} прийнято. Чекаємо на вас!`;
+          modalOverlay.style.display = 'flex';
+
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+
+        }, 1500);
+      }
+    });
+
+    // Закриття модального вікна
+    modalClose.addEventListener('click', () => {
+      modalOverlay.style.display = 'none';
+    });
+
+    modalOk.addEventListener('click', () => {
+      modalOverlay.style.display = 'none';
+    });
+
+    // Закриття по кліку поза вікном
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.style.display = 'none';
+      }
+    });
+
+    // Ескейп для закриття модального вікна
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.style.display === 'flex') {
+        modalOverlay.style.display = 'none';
+      }
+    });
+
+    // Анімація при скролі
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Спостерігач для анімації елементів при скролі
+    document.querySelectorAll('.service-card, .feedback-form').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+
+    // Плавний скрол до секцій
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId !== '#') {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // Мобільна адаптація
+    function checkMobile() {
+      if (window.innerWidth <= 768) {
+        // Заміна hover на active для мобільних
+        serviceCards.forEach(card => {
+          card.addEventListener('touchstart', function () {
+            this.classList.add('active');
+          });
+
+          card.addEventListener('touchend', function () {
+            setTimeout(() => {
+              this.classList.remove('active');
+            }, 150);
+          });
+        });
+      }
+    }
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // Ініціалізація
+    console.log('Сайт автомийки завантажено! Всі функції готові до роботи.');
+  </script>
 </body>
+
 </html>
